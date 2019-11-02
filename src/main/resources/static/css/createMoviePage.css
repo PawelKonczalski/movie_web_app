@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    text-align: center;
+    color: blueviolet;
+}
+
+body {
+    background-color: black;
+}
+
+main {
+    position: absolute;
+    width: 80vw;
+    height: 80vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    padding: 4vh;
+    font-size: 4vh;
+}
+
+.text {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 1vh;
+    font-size: 2vh;
+    width: 60%;
+    margin: 2vh 20%;
+    border: none;
+    border-radius: 25px;
+    color: black;
+    resize: none;
+}
+
+textarea {
+    height: 20vh;
+}
+
+.checkbox {
+    display: inline-block;
+    margin: 2vh 1vh;
+}
+
+input[type="checkbox"]:not(:checked),
+input[type="checkbox"]:checked {
+    opacity: 0;
+}
+
+span {
+    border: .3vh blueviolet solid;
+    border-radius: 50px;
+    font-size: 2vh;
+    padding: .8vh;
+}
+
+input[type="checkbox"]:checked + span {
+    color: darkorange;
+    border-color: darkorange;
+}
+
+.btn {
+    background-color: blueviolet;
+    border: none;
+    padding: .8vh;
+    width: 40%;
+    border-radius: 50px;
+    font-size: 2vh;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    margin: 2vh;
+}
+
+
+
+

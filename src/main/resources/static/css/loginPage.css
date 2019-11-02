@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+body {
+    background-image: url("../img/background.jpg");
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+main, aside {
+    position: absolute;
+    width: 50vw;
+    height: 100vh;
+    transition: .8s;
+}
+
+main {
+    left: -50%;
+    background: rgba(255, 255, 255, .6);
+}
+
+aside {
+    left: 100%;
+    background: rgba(255, 255, 255, .2);
+}
+
+main.active {
+    left: 0;
+}
+
+aside.active {
+    left: 50%;
+}
+
+.login, .signup {
+    position: absolute;
+    width: 80%;
+    height: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .7);
+}
+
+h2 {
+    font-size: 10vh;
+    font-weight: bold;
+    margin-top: 3vh;
+    color: blueviolet;
+}
+
+p {
+    font-weight: bold;
+    margin: 5vh;
+    font-size: 4vh;
+    color: blueviolet;
+}
+
+button {
+    position: absolute;
+    background-color: blueviolet;
+    border: none;
+    padding: 2vh;
+    width: 80%;
+    border-radius: 5px;
+    font-size: 4vh;
+    color: black;
+    cursor: pointer;
+    bottom: 3vh;
+    left: 10%;
+}
+
+input {
+    box-sizing: border-box;
+    text-align: center;
+    padding: 1vh;
+    font-size: 4vh;
+    width: 80%;
+    margin: 4vh 10%;
+    border: none;
+    color: #757575;
+}
+
+.form {
+    position: absolute;
+    width: 80%;
+    height: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .7);
+}
+
+i{
+    display: block;
+    position: absolute;
+    font-size: 5vh;
+    padding: 2vh;
+    margin: 1vh;
+    left: 0;
+    border: 2px black solid;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.error{
+    color: darkorange;
+    font-size: 2vh; ;
+    text-transform: uppercase;
+}
