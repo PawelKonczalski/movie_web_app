@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Movies</title>
+    <link href="css/moviesPage.css" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="http://localhost:8080/movies">Movies</a></li>
+        <li><a href="http://localhost:8080/watched">Already seen</a></li>
+        <li><a href="http://localhost:8080/createMovie">Create new movie</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="http://localhost:8080/adminPanel">Admin panel</a></li>
+        <li><a href="http://localhost:8080/logout">Logout</a></li>
+    </ul>
+</nav>
+<main>
+    <div th:if="${(movie.confirmed && !user.movieList.contains(movie) && #httpServletRequest.requestURI == '/movies') ||
+    (movie.confirmed && user.movieList.contains(movie) && #httpServletRequest.requestURI == '/watched')}"
+         th:each="movie: ${movies}" class="movie">
+        <h2 th:text="${movie.movieTitle}"></h2>
+        <ul>
+            <li th:each="movieCategories: ${movie.movieCategory}" th:text="${movieCategories}"></li>
+        </ul>
+        <div class="movieDesc">
+            <img src="https://ih0.redbubble.net/image.71296324.8378/raf,750x1000,075,t,f89f2b:1617e563f0.jpg" alt="img">
+            <div class="moviePan">
+                <p th:text="${movie.description}"></p>
+                <form method="post" th:if="${#httpServletRequest.requestURI == '/movies'}"
+                      th:action="addMovieToUser + '/' + ${movie.id}">
+                    <input type="submit"
+                           th:value="watched">
+                </form>
+                <form method="post" th:if="${#httpServletRequest.requestURI == '/watched'}"
+                      th:action="removeMovieFromUser + '/' + ${movie.id}">
+                    <input type="submit" value="not watched">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

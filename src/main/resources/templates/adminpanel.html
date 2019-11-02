@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Admin panel</title>
+    <link href="css/adminPanelPage.css" rel="stylesheet">
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="http://localhost:8080/movies">Movies</a></li>
+        <li><a href="http://localhost:8080/watched">Already seen</a></li>
+        <li><a href="http://localhost:8080/createMovie">Create new movie</a></li>
+        <li><a href="http://localhost:8080/adminPanel">Admin panel</a></li>
+        <li><a href="http://localhost:8080/logout">Logout</a></li>
+    </ul>
+</nav>
+<main>
+    <table>
+        <thead>
+        <th>Movie title</th>
+        <th>Movie category</th>
+        <th>Description</th>
+        <th>Confirmed</th>
+        <th>Remove</th>
+        </thead>
+        <tbody>
+        <tr th:each="movie: ${movies}">
+            <td th:text="${movie.movieTitle}"></td>
+            <td><p th:each="movieCategories: ${movie.movieCategory}" th:text=${movieCategories}></p></td>
+            <td th:text="${movie.description}"></td>
+            <td>
+                <form method="post" th:action="updateConfirmed + '/' + ${movie.id}">
+                    <input type="submit" th:value="${movie.confirmed} ? ACTIVE : INACTIVE">
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="delete + '/' + ${movie.id}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

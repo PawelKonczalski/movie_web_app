@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Create movie</title>
+    <link href="css/createMoviePage.css" rel="stylesheet">
+</head>
+<body>
+<main>
+    <h1>This page allow you to add new movie to exist list after administrator confirm your request to add.</h1>
+    <form method="post" action="/movie/createMovie">
+        <label><input class="text" type="text" required name="movieTitle" placeholder="Movie title"
+                      maxlength="250"></label>
+        <label class="checkbox" th:each="movieCategory :${movieCategory}">
+            <input type="checkbox"
+                   name="movieCategory"
+                   th:value="${movieCategory}">
+            <span th:text="${movieCategory}"></span>
+        </label>
+        <label><textarea class="text" required name="description" placeholder="Description" maxlength="1000"></textarea></label>
+        <input class="btn" type="submit" value="Add movie">
+    </form>
+    <button class="btn" onclick="location.href='http://localhost:8080/watched'" type="button">return to movie list
+    </button>
+</main>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="js/movieCreatePage.js"></script>
+</html>

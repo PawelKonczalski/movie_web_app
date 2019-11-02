@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
+          integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
+          crossorigin="anonymous">
+    <link href="css/loginPage.css" rel="stylesheet">
+</head>
+<body>
+
+<main class="active">
+    <div class="login">
+        <h2>LOGIN</h2>
+        <p>Login to your own movie list account</p>
+        <p class="error"></p>
+        <button class="loginBtn">LOGIN</button>
+    </div>
+</main>
+
+<main>
+    <i class="fas fa-arrow-left main"></i>
+    <div class="login">
+        <form action="/login" method="post">
+            <h2>LOGIN</h2>
+            <label><input id="login" type="text" placeholder="User" name="username"/></label>
+            <label><input type="password" placeholder="Password" name="password"/></label>
+            <button>LOGIN</button>
+        </form>
+    </div>
+</main>
+
+
+<aside class="active">
+    <div class="signup">
+        <h2>SIGN UP</h2>
+        <p>Don't have account yet?</p>
+        <p>Sign up and create your own personal movie list.</p>
+        <button class="signupBtn">SIGN UP</button>
+    </div>
+</aside>
+
+<aside>
+    <i class="fas fa-arrow-left aside"></i>
+    <div class="form">
+        <form method="post" action="/user/addUser" id="signupForm">
+            <h2>SIGN UP</h2>
+            <label><input type="text" required name="username" placeholder="User"/></label>
+            <label><input class="pass" type="password" required name="password" placeholder="Password"/></label>
+            <label><input class="confPass" type="password" name="confirmPassword"
+                          placeholder="Confirm Password"/></label>
+            <button class="signupFormBtn">SIGN UP</button>
+        </form>
+    </div>
+</aside>
+
+<script src="js/loginPage.js"></script>
+</body>
+</html>
