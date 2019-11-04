@@ -10,19 +10,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private MovieRepository movieRepository;
 
@@ -35,17 +34,22 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
-        } else if (user.getRoles().equals("ADMIN")) {
-            return new org.springframework.security.core.userdetails.User(username, user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN")));
         } else {
-            return new org.springframework.security.core.userdetails.User(username, user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+            return new org.springframework.security.core.userdetails.
+                    User(username, user.getPassword(),
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRoles())));
         }
     }
 
     public User create(String username, String password) {
         User user = new User();
+        UUID id = UUID.randomUUID();
+        while (userRepository.existsById(id)) {
+            id = UUID.randomUUID();
+        }
+        user.setId(id);
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         return userRepository.save(user);
     }
 
@@ -84,7 +88,7 @@ public class UserService implements UserDetailsService {
 
     public void deleteMovie(Integer movieId) {
         Optional<Movie> movies = movieRepository.findById(movieId);
-        List<User> users = userRepository.findAll();
+        Iterable<User> users = userRepository.findAll();
         movies.ifPresent(movie -> users.forEach(user -> {
             if (user.getMovieList().contains(movie)) {
                 user.getMovieList().remove(movie);

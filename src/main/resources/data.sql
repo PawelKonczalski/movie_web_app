@@ -1,5 +1,3 @@
-INSERT INTO user (username, password, roles) VALUES ('admin', 'admin', 'ADMIN'), ('user', 'user', 'USER');
-
 INSERT INTO movie (MOVIE_TITLE , DESCRIPTION, CONFIRMED) VALUES
 ('Armagedon', 'Po odkryciu asteroidy wielkości Teksasu, która zmierza w kierunku Ziemi, NASA rekrutuje grupę wiertniczych i wysyła na misję ratowania planety.', 'true'),
 ('2012', 'Jackson Curtis próbuje ocalić najbliższych przed niszczącymi Ziemię kataklizmami.', 'true'),
@@ -17,6 +15,3 @@ INSERT INTO MOVIE_MOVIE_CATEGORY  (MOVIE_ID, MOVIE_CATEGORY ) VALUES
 (5, 3),
 (5, 9);
 
-INSERT INTO USER_MOVIE_LIST   (USER_ID , MOVIE_LIST_ID) VALUES
-(1, 1),
-(1, 2);
