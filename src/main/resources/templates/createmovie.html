@@ -10,7 +10,8 @@
 <body>
 <main>
     <h1>This page allow you to add new movie to exist list after administrator confirm your request to add.</h1>
-    <form method="post" action="/movie/createMovie">
+    <form method="post" action="/movie/createMovie" enctype="multipart/form-data">
+        <label><input type="file" name="file" accept=".jpg"><span class="btn" >choose movie poster</span></label>
         <label><input class="text" type="text" required name="movieTitle" placeholder="Movie title"
                       maxlength="250"></label>
         <label class="checkbox" th:each="movieCategory :${movieCategory}">
@@ -22,7 +23,7 @@
         <label><textarea class="text" required name="description" placeholder="Description" maxlength="1000"></textarea></label>
         <input class="btn" type="submit" value="Add movie">
     </form>
-    <button class="btn" onclick="location.href='http://localhost:8080/watched'" type="button">return to movie list
+    <button class="btn" onclick="location.href='movies'" type="button">return to movie list
     </button>
 </main>
 </body>

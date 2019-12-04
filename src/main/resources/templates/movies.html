@@ -10,11 +10,11 @@
 <body>
 <nav>
     <ul>
-        <li><a href="http://localhost:8080/movies">Movies</a></li>
-        <li><a href="http://localhost:8080/watched">Already seen</a></li>
-        <li><a href="http://localhost:8080/createMovie">Create new movie</a></li>
-        <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="http://localhost:8080/adminPanel">Admin panel</a></li>
-        <li><a href="http://localhost:8080/logout">Logout</a></li>
+        <li><a th:href="@{/movies}">Movies</a></li>
+        <li><a th:href="@{watched}">Already seen</a></li>
+        <li><a th:href="@{createMovie}">Create new movie</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{adminPanel}">Admin panel</a></li>
+        <li><a th:href="@{logout}">Logout</a></li>
     </ul>
 </nav>
 <main>
@@ -26,7 +26,7 @@
             <li th:each="movieCategories: ${movie.movieCategory}" th:text="${movieCategories}"></li>
         </ul>
         <div class="movieDesc">
-            <img src="https://ih0.redbubble.net/image.71296324.8378/raf,750x1000,075,t,f89f2b:1617e563f0.jpg" alt="img">
+            <img th:src="@{/files(file=${movie.movieImg})}">
             <div class="moviePan">
                 <p th:text="${movie.description}"></p>
                 <form method="post" th:if="${#httpServletRequest.requestURI == '/movies'}"

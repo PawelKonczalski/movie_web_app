@@ -2,23 +2,29 @@ package com.babel.movieapp.movies.web;
 
 import com.babel.movieapp.movies.model.Movie;
 import com.babel.movieapp.movies.model.MovieCategory;
+import com.babel.movieapp.movies.service.FileService;
 import com.babel.movieapp.movies.service.MovieService;
 import com.babel.movieapp.users.service.UserService;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class MvcMovieController {
 
     private final MovieService movieService;
     private final UserService userService;
+    private final FileService fileService;
 
-    public MvcMovieController(MovieService movieService, UserService userService) {
+    public MvcMovieController(MovieService movieService, UserService userService, FileService fileService) {
         this.movieService = movieService;
         this.userService = userService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/movies")
@@ -42,9 +48,20 @@ public class MvcMovieController {
     }
 
     @PostMapping("/movie/createMovie")
-    public String addMovie(Movie movie) {
+    public String addMovie(Movie movie, @RequestParam(value = "file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            fileService.saveFile(file);
+            movie.setMovieImg(file.getOriginalFilename());
+        }
+        movie.setAuthor(userService.getCurrentlyLoginUser().getUsername());
         movieService.create(movie);
         return "redirect:/movies";
+    }
+
+    @GetMapping
+    @RequestMapping("/files")
+    public ResponseEntity<Resource> downloadFile(@RequestParam("file") String file) {
+        return fileService.responseEntity(file);
     }
 
     @GetMapping("/adminPanel")

@@ -64,6 +64,10 @@ input[type="checkbox"]:checked + span {
     border-color: darkorange;
 }
 
+input[type="file"] {
+    display: none;
+}
+
 .btn {
     background-color: blueviolet;
     border: none;

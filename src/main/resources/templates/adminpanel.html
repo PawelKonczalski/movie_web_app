@@ -10,11 +10,11 @@
 <body>
 <nav>
     <ul>
-        <li><a href="http://localhost:8080/movies">Movies</a></li>
-        <li><a href="http://localhost:8080/watched">Already seen</a></li>
-        <li><a href="http://localhost:8080/createMovie">Create new movie</a></li>
-        <li><a href="http://localhost:8080/adminPanel">Admin panel</a></li>
-        <li><a href="http://localhost:8080/logout">Logout</a></li>
+        <li><a th:href="@{movies}">Movies</a></li>
+        <li><a th:href="@{watched}">Already seen</a></li>
+        <li><a th:href="@{createMovie}">Create new movie</a></li>
+        <li><a th:href="@{adminPanel}">Admin panel</a></li>
+        <li><a th:href="@{logout}">Logout</a></li>
     </ul>
 </nav>
 <main>
@@ -23,6 +23,7 @@
         <th>Movie title</th>
         <th>Movie category</th>
         <th>Description</th>
+        <th>Author</th>
         <th>Confirmed</th>
         <th>Remove</th>
         </thead>
@@ -31,6 +32,7 @@
             <td th:text="${movie.movieTitle}"></td>
             <td><p th:each="movieCategories: ${movie.movieCategory}" th:text=${movieCategories}></p></td>
             <td th:text="${movie.description}"></td>
+            <td th:text="${movie.author}"></td>
             <td>
                 <form method="post" th:action="updateConfirmed + '/' + ${movie.id}">
                     <input type="submit" th:value="${movie.confirmed} ? ACTIVE : INACTIVE">
